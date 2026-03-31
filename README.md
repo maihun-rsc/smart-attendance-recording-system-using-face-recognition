@@ -47,3 +47,8 @@ pip install opencv-python numpy pandas scikit-learn streamlit streamlit-autorefr
 - To reset the system or remove users, delete the `.pkl` files inside the `data/` directory (except the `haarcascade` xml file).
 - The Text-to-Speech feature (`win32com.client`) works out-of-the-box on Windows. If running on another OS, you'll need to modify the `speak()` function in `test.py` to use an alternative TTS library like `pyttsx3`.
 - Ensure you have `before_attendance.png` and `attendance_taken.png` in the root directory for the UI frames to load properly in `test.py`.
+
+
+## Created by 
+- Rananjay Singh Chauhan
+- [Anugya Chaubey](https://github.com/chaubeyanugya/face-recognition-attendance-system)
