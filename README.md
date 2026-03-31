@@ -1,46 +1,49 @@
+# Smart Attendance System using Face Recognition
 
-# Face Recognition Attendance System with KNN
-
-
-## Overview
-
-This project is a face recognition-based attendance system that leverages K-Nearest Neighbors (KNN) for classification. It captures video frames using a webcam, detects faces, and identifies individuals based on a pre-trained model. The system records attendance by logging names, registration numbers, and timestamps.
+This is a Python-based Smart Attendance System that utilizes facial recognition to automate the process of taking attendance. The project uses OpenCV for face detection, K-Nearest Neighbors (KNN) from scikit-learn for face recognition, and Streamlit to display the attendance records in a web interface.
 
 ## Features
+- **Face Registration**: Capture and store face encodings along with the user's name and registration number.
+- **Automated Attendance**: Real-time face recognition to mark attendance seamlessly.
+- **Audio Feedback**: Voice greeting using Windows Text-to-Speech when attendance is marked.
+- **Live Dashboard**: A Streamlit web application that auto-refreshes to display the day's attendance records.
 
-- Face Detection: Uses OpenCV's Haar cascade classifier to detect faces in real-time from webcam footage.
-- Face Recognition: Employs a KNeighborsClassifier model trained on labeled images to recognize individuals.
-- Registration Number Identification: A separate KNeighborsClassifier model predicts registration numbers linked to recognized faces.
-- Attendance Logging: Once confirmed (by pressing the 'o' key), the system records attendance details in a CSV file named "Attendance\_Date.csv" (Date follows DD-MM-YYYY format).
+## Project Structure
+- `add_faces.py`: Script to register new users by capturing 100 face images through the webcam and saving their encodings in the `data/` directory.
+- `test.py`: Main script for taking attendance. It captures video feed, recognizes registered faces using a trained KNN model, and logs the attendance with a timestamp into a CSV file inside the `Attendance/` directory.
+- `app.py`: A Streamlit web dashboard that reads the daily attendance CSV file and displays it in a tabular format. The dashboard auto-refreshes every 2 seconds.
+- `data/`: Directory containing the Haar cascade XML file (`haarcascade_frontalface_default.xml`) for face detection and the pickled `.pkl` files storing names, registration numbers, and face encodings.
+- `Attendance/`: Directory where daily attendance is saved as CSV files (`Attendance_DD-MM-YYYY.csv`).
 
-### Optional Features
+## Prerequisites
+Ensure you have Python installed. Install the required dependencies using:
 
-- Text-to-Speech Notification: Announces attendance confirmation (requires `win32com` library).
-- Custom Background Overlay: Allows a background image to be added to the video frame.
+```bash
+pip install opencv-python numpy pandas scikit-learn streamlit streamlit-autorefresh pywin32
+```
+*Note: `pywin32` is required for the Text-to-Speech functionality on Windows.*
 
-## Requirements
+## How to Run
 
-Ensure you have the following installed:
+1. **Register a User**:
+   Run the `add_faces.py` script. Enter your name and registration number in the terminal. Look at the webcam until 100 frames of your face are captured.
+   ```bash
+   python add_faces.py
+   ```
 
-- Python 3.x
-- OpenCV (`pip install opencv-python`)
-- NumPy (`pip install numpy`)
-- Scikit-learn (`pip install scikit-learn`)
-- Pickle (included in Python)
-- CSV (included in Python)
-- `win32com` (optional, for Text-to-Speech functionality)
+2. **Take Attendance**:
+   Run the `test.py` script. It will open your webcam and draw a bounding box around your face. Press the **`o`** key to confirm and mark your attendance. Your details will be saved in today's CSV file. Press **`x`** to exit the window.
+   ```bash
+   python test.py
+   ```
 
-## Setup Instructions
+3. **View Attendance Dashboard**:
+   Run the Streamlit app to view the live attendance sheet.
+   ```bash
+   streamlit run app.py
+   ```
 
-1. Download Face Detection Classifier: Obtain OpenCV's Haar cascade classifier for frontal face detection from [OpenCV's official documentation](https://docs.opencv.org/4.x/db/d28/tutorial_cascade_classifier.html). Place the file in a newly created `data` folder within the project directory.
-2. Train the KNN Models: Prepare a dataset containing labeled face images along with corresponding names and registration numbers. Train the KNN models using provided scripts or custom code. Save the trained models as `names.pkl`, `faces_data.pkl`, and `regs.pkl` in the `data` folder.
-3. Run the Script: Execute `test.py` using Python. The script will initiate the webcam, detect and recognize faces, and record attendance upon confirmation.
-
-## Additional Notes
-
-- System accuracy depends on the quality and diversity of the training data, as well as optimal KNN parameter selection.
-- Enhancements can include confidence-based predictions, handling multiple faces in a single frame, and improved database integration.
-
-## 📧 **Created by** 
-1. Rananjay Singh Chauhan
-2. [Anugya Chaubey](https://github.com/chaubeyanugya/face-recognition-attendance-system/)
+## Notes
+- To reset the system or remove users, delete the `.pkl` files inside the `data/` directory (except the `haarcascade` xml file).
+- The Text-to-Speech feature (`win32com.client`) works out-of-the-box on Windows. If running on another OS, you'll need to modify the `speak()` function in `test.py` to use an alternative TTS library like `pyttsx3`.
+- Ensure you have `before_attendance.png` and `attendance_taken.png` in the root directory for the UI frames to load properly in `test.py`.
