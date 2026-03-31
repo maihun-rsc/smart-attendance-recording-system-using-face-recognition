@@ -43,4 +43,4 @@ Ensure you have the following installed:
 
 ## 📧 **Created by** 
 Rananjay Singh Chauhan
-[Anugya Chaubey]https://github.com/chaubeyanugya/face-recognition-attendance-system/
+[Anugya Chaubey](https://github.com/chaubeyanugya/face-recognition-attendance-system/)
