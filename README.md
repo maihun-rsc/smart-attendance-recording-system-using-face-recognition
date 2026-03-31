@@ -42,5 +42,5 @@ Ensure you have the following installed:
 - Enhancements can include confidence-based predictions, handling multiple faces in a single frame, and improved database integration.
 
 ## 📧 **Created by** 
-Rananjay Singh Chauhan
-[Anugya Chaubey](https://github.com/chaubeyanugya/face-recognition-attendance-system/)
+1. Rananjay Singh Chauhan
+2. [Anugya Chaubey](https://github.com/chaubeyanugya/face-recognition-attendance-system/)
